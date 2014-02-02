@@ -207,9 +207,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Programs
     , ((0,                          xK_Print    ), spawn "scrot -e 'mv $f ~/screenshots/'")
     -- Media Keys
-    , ((0,                          0x1008ff12  ), spawn "amixer -q sset Headphone toggle")        -- XF86AudioMute
-    , ((0,                          0x1008ff11  ), spawn "amixer -q sset Headphone 5%-")   -- XF86AudioLowerVolume
-    , ((0,                          0x1008ff13  ), spawn "amixer -q sset Headphone 5%+")   -- XF86AudioRaiseVolume
+    , ((modMask,                    0x1008ff1d  ), spawn "amixer -q sset Master toggle")        -- XF86AudioMute
+    , ((modMask,                    xK_Down     ), spawn "amixer -q sset Master 5%-")   -- XF86AudioLowerVolume
+    , ((modMask,                    xK_Up       ), spawn "amixer -q sset Master 5%+")   -- XF86AudioRaiseVolume
     -- , ((0,                          0x1008ff14  ), spawn "rhythmbox-client --play-pause")
     -- , ((0,                          0x1008ff17  ), spawn "rhythmbox-client --next")
     -- , ((0,                          0x1008ff16  ), spawn "rhythmbox-client --previous")
