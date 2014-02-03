@@ -82,7 +82,7 @@ main = do
 manageHook' :: ManageHook
 manageHook' = (composeAll . concat $
     [ [resource     =? r            --> doIgnore              |   r   <- myIgnores] -- ignore desktop
-    , [className    =? c            --> doShift  "1:console"  |   c   <- myDev    ] -- move dev to main
+    -- , [className    =? c            --> doShift  "1:console"  |   c   <- myDev    ] -- move dev to main
     , [className    =? c            --> doShift  "2:emacs"    |   c   <- myEmacs  ] -- move webs to main
     , [className    =? c            --> doShift  "3:web"      |   c   <- myWebs1  ] -- move webs to main
     , [className    =? c            --> doShift	 "4:mail"     |   c   <- myMail   ] -- move chat to chat
@@ -103,13 +103,13 @@ manageHook' = (composeAll . concat $
         -- classnames
         myFloats  = ["Smplayer","MPlayer","VirtualBox","Xmessage","XFontSel","Downloads","Nm-connection-editor"]
         myWebs1   = ["Google-chrome","Chromium", "Chromium-browser"]
-        myWebs2   = ["Firefox"]
-        myMail    = ["Thunderbird"]
+        myWebs2   = ["Firefox", "Iceweasel"]
+        myMail    = ["Thunderbird", "Icedove"]
         myMovie   = ["Boxee","Trine"]
         myMusic	  = ["Rhythmbox","Spotify"]
         --myChat	  = ["Pidgin","Buddy List", "Psi", "Psi+", "chat", "psi"]
         myGimp	  = ["Gimp"]
-        myDev	  = ["terminator"]
+        myDev	  = ["Terminator"]
         myEmacs	  = ["emacs"]
 
         -- resources
@@ -255,7 +255,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                    xK_q        ), spawn "/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart")
 
     -- keyboard layout
-    , ((modMask,                    xK_Scroll_Lock), spawn "/home/kutsurak/.xmonad/bin/layout_switch.sh")
+    , ((modMask .|. shiftMask,      xK_Num_Lock        ), spawn "/home/kutsurak/.xmonad/bin/layout_switch.sh")
     ]
     ++
     -- mod-[1..9] %! Switch to workspace N
