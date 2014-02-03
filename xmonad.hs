@@ -40,6 +40,7 @@ import Data.Ratio ((%))
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 
+import XMonad.Actions.SpawnOn
 --}}}
 
 -- Config {{{
@@ -70,7 +71,8 @@ main = do
       , normalBorderColor   = colorNormalBorder
       , focusedBorderColor  = colorFocusedBorder
       , borderWidth         = 2
-      -- , startupHook         = setWMName "LG3D"
+      --, startupHook         = setWMName "LG3D"
+      , startupHook         = startupHook'
 }
 --}}}
 
@@ -120,6 +122,12 @@ manageHook' = (composeAll . concat $
 myDoFullFloat :: ManageHook
 myDoFullFloat = doF W.focusDown <+> doFullFloat
 -- }}}
+
+startupHook' :: X ()
+startupHook' = do
+       setWMName "LG3D"
+       spawn "/bin/sh /home/kutsurak/.xmonad/bin/startup.sh"
+
 layoutHook'  =  onWorkspaces ["1:main"] customLayout $
                 onWorkspaces ["6:gimp"] gimpLayout $ 
                 onWorkspaces ["9:chat"] imLayout $
