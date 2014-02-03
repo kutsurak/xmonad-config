@@ -245,6 +245,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- quit, or restart
     , ((modMask .|. shiftMask,      xK_q        ), io (exitWith ExitSuccess))
     , ((modMask,                    xK_q        ), spawn "/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart")
+
+    -- keyboard layout
+    , ((modMask,                    xK_Scroll_Lock), spawn "/home/kutsurak/.xmonad/bin/layout_switch.sh")
     ]
     ++
     -- mod-[1..9] %! Switch to workspace N
