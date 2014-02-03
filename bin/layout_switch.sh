@@ -1,18 +1,18 @@
 #!/bin/zsh
 
 if [[ -n "$1" ]]; then
-	setxkbmap $1
+	setxkbmap $1 -option ctrl:swapcaps
 else
-	layout=$(setxkbmap -query | awk 'END{print $2}')
+	layout=$($HOME/.xmonad/bin/show_layout.sh)
 	case $layout in
 		us)
-			setxkbmap gr
+			setxkbmap gr -option ctrl:swapcaps
 			;;
 		*)
-			setxkbmap us
+			setxkbmap us -option ctrl:swapcaps
 			;;
 	esac
 fi
 
 # remap capslock to control
-xmodmap ~/.xmodmap
+#xmodmap $HOME/.xmonad/.xmodmap
