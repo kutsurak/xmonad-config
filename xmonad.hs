@@ -45,7 +45,7 @@ import XMonad.Actions.SpawnOn
 
 -- Config {{{
 -- Define Terminal
-myTerminal      = "gnome-terminal"
+myTerminal      = "terminator"
 -- Define modMask
 modMask' :: KeyMask
 modMask' = mod4Mask
@@ -89,10 +89,10 @@ manageHook' = (composeAll . concat $
     , [className    =? c            --> doShift  "5:music"    |   c   <- myMusic  ] -- move music to music
     , [className    =? c            --> doShift  "6:gimp"     |   c   <- myGimp   ] -- move img to div
     , [className    =? c            --> doShift  "8:web"      |   c   <- myWebs2  ]
-    --, [className    =? c            --> doShift  "9:chat"     |   c   <- myChat   ]
+  --, [className    =? c            --> doShift  "9:chat"     |   c   <- myChat   ]
     , [className    =? c            --> doCenterFloat         |   c   <- myFloats ] -- float my floats
     , [name         =? n            --> doCenterFloat         |   n   <- myNames  ] -- float my names
-    , [isFullscreen                 --> myDoFullFloat                           ]
+    , [isFullscreen                 --> myDoFullFloat                             ]
     ]) 
 
     where
@@ -109,7 +109,7 @@ manageHook' = (composeAll . concat $
         myMusic	  = ["Rhythmbox","Spotify"]
         --myChat	  = ["Pidgin","Buddy List", "Psi", "Psi+", "chat", "psi"]
         myGimp	  = ["Gimp"]
-        myDev	  = ["gnome-terminal"]
+        myDev	  = ["terminator"]
         myEmacs	  = ["emacs"]
 
         -- resources
@@ -131,7 +131,7 @@ startupHook' = do
 layoutHook'  =  onWorkspaces ["1:main"] customLayout $
                 onWorkspaces ["6:gimp"] gimpLayout $ 
                 onWorkspaces ["9:chat"] imLayout $
-                customLayout2
+                customLayout
 
 --Bar
 myLogHook :: Handle -> X ()
@@ -146,8 +146,8 @@ myLogHook h = dynamicLogWithPP $ defaultPP
       , ppSep               =   "  |  "
       , ppLayout            =   dzenColor "#ebac54" "#1B1D1E" .
                                 (\x -> case x of
-                                    "ResizableTall"             ->      "^i(" ++ myBitmapsDir ++ "/tall.xbm)"
-                                    "Mirror ResizableTall"      ->      "^i(" ++ myBitmapsDir ++ "/mtall.xbm)"
+                                    "Spacing 5 ResizableTall"             ->      "^i(" ++ myBitmapsDir ++ "/tall.xbm)"
+                                    "Mirror Spacing 5 ResizableTall"      ->      "^i(" ++ myBitmapsDir ++ "/mtall.xbm)"
                                     "Full"                      ->      "^i(" ++ myBitmapsDir ++ "/full.xbm)"
                                     "Simple Float"              ->      "~"
                                     _                           ->      x
@@ -159,17 +159,17 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 -- Layout
 customLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full ||| simpleFloat
   where
-    tiled   = ResizableTall 1 (2/100) (1/2) []
+    tiled   = spacing 5 $ ResizableTall 1 (2/100) (1/2) []
 
-customLayout2 = avoidStruts $ Full ||| tiled ||| Mirror tiled ||| simpleFloat
-  where
-    tiled   = ResizableTall 1 (2/100) (1/2) []
+-- customLayout2 = avoidStruts $ Full ||| tiled ||| Mirror tiled ||| simpleFloat
+--   where
+--     tiled   = spacing 5 $ ResizableTall 1 (2/100) (1/2) []
 
 gimpLayout  = avoidStruts $ withIM (0.11) (Role "gimp-toolbox") $
               reflectHoriz $
               withIM (0.15) (Role "gimp-dock") Full
 
-imLayout    = avoidStruts $ withIM (1%5) (Or (Title "Buddy List") (And (Resource "main") (ClassName "psi"))) Grid 
+imLayout    = avoidStruts $ spacing 5 $ withIM (1%5) (Or (Title "Buddy List") (And (Resource "main") (ClassName "psi"))) Grid 
 --}}}
 -- Theme {{{
 -- Color names are easier to remember:
