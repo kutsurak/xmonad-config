@@ -51,8 +51,8 @@ modMask' = mod4Mask
 -- Define workspaces
 myWorkspaces    = ["1:console","2:emacs","3:web","4:mail","5:doc","6:gimp","7:misc","8:web"]
 -- Dzen/Conky
-myXmonadBar = "dzen2 -x '0' -y '0' -h '24' -w '920' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
-myStatusBar = "conky -c /home/kutsurak/.xmonad/.conky_dzen | dzen2 -x '920 -w '920' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
+myXmonadBar = "dzen2 -x '0' -y '0' -h '24' -w '960' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+myStatusBar = "conky -c /home/kutsurak/.xmonad/.conky_dzen | dzen2 -x '960' -w '960' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
 myBitmapsDir = "/home/kutsurak/.xmonad/dzen2"
 --}}}
 -- Main {{{
@@ -81,11 +81,12 @@ manageHook' :: ManageHook
 manageHook' = (composeAll . concat $
     [ [resource     =? r            --> doIgnore              |   r   <- myIgnores] -- ignore desktop
     , [className    =? c            --> doShift  "1:console"  |   c   <- myDev    ] -- move dev to main
-    , [className    =? c            --> doShift  "2:emacs"    |   c   <- myWebs   ] -- move webs to main
-    , [className    =? c            --> doShift  "3:web"      |   c   <- myWebs   ] -- move webs to main
+    , [className    =? c            --> doShift  "2:emacs"    |   c   <- myEmacs  ] -- move webs to main
+    , [className    =? c            --> doShift  "3:web"      |   c   <- myWebs1  ] -- move webs to main
     , [className    =? c            --> doShift	 "4:chat"     |   c   <- myChat   ] -- move chat to chat
     , [className    =? c            --> doShift  "5:music"    |   c   <- myMusic  ] -- move music to music
     , [className    =? c            --> doShift  "6:gimp"     |   c   <- myGimp   ] -- move img to div
+    , [className    =? c            --> doShift  "8:web"      |   c   <- myWebs2  ]
     , [className    =? c            --> doCenterFloat         |   c   <- myFloats ] -- float my floats
     , [name         =? n            --> doCenterFloat         |   n   <- myNames  ] -- float my names
     , [isFullscreen                 --> myDoFullFloat                           ]
@@ -98,13 +99,14 @@ manageHook' = (composeAll . concat $
 
         -- classnames
         myFloats  = ["Smplayer","MPlayer","VirtualBox","Xmessage","XFontSel","Downloads","Nm-connection-editor"]
-        myWebs    = ["Firefox","Google-chrome","Chromium", "Chromium-browser"]
+        myWebs1   = ["Google-chrome","Chromium", "Chromium-browser"]
+        myWebs2   = ["Firefox"]
         myMovie   = ["Boxee","Trine"]
         myMusic	  = ["Rhythmbox","Spotify"]
         myChat	  = ["Pidgin","Buddy List", "Psi", "Psi+", "chat", "psi"]
         myGimp	  = ["Gimp"]
         myDev	  = ["gnome-terminal"]
-        myVim	  = ["emacs"]
+        myEmacs	  = ["emacs"]
 
         -- resources
         myIgnores = ["desktop","desktop_window","notify-osd","stalonetray","trayer"]
