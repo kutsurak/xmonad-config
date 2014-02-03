@@ -128,7 +128,7 @@ startupHook' = do
        setWMName "LG3D"
        spawn "/bin/sh /home/kutsurak/.xmonad/bin/startup.sh"
 
-layoutHook'  =  onWorkspaces ["1:main"] customLayout $
+layoutHook'  =  onWorkspaces ["2:emacs", "3:web", "4:mail", "8:web"] customLayout2 $
                 onWorkspaces ["6:gimp"] gimpLayout $ 
                 onWorkspaces ["9:chat"] imLayout $
                 customLayout
@@ -161,9 +161,9 @@ customLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full ||| simpleFloat
   where
     tiled   = spacing 5 $ ResizableTall 1 (2/100) (1/2) []
 
--- customLayout2 = avoidStruts $ Full ||| tiled ||| Mirror tiled ||| simpleFloat
---   where
---     tiled   = spacing 5 $ ResizableTall 1 (2/100) (1/2) []
+customLayout2 = avoidStruts $ Full ||| tiled ||| Mirror tiled ||| simpleFloat
+  where
+    tiled   = spacing 5 $ ResizableTall 1 (2/100) (1/2) []
 
 gimpLayout  = avoidStruts $ withIM (0.11) (Role "gimp-toolbox") $
               reflectHoriz $
