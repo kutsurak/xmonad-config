@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pic=$HOME/Pictures/cZJK7.jpg
+pic=$HOME/Pictures/wallpapers/debian-red-logo-wallpapers_34062_1920x1080.jpg
 
 /usr/bin/feh --bg-fill $pic
-xsetkbmap -option ctrl:swapcaps
+setxkbmap -option ctrl:swapcaps
