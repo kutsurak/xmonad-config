@@ -243,6 +243,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                    xK_comma    ), sendMessage (IncMasterN 1))
     , ((modMask,                    xK_period   ), sendMessage (IncMasterN (-1)))
 
+    -- pomodoro
+    , ((modMask,                    xK_s        ), spawn "touch ~/.pomodoro_session")
+    , ((modMask .|. shiftMask,      xK_s        ), spawn "rm ~/.pomodoro_session")
 
     -- workspaces
     , ((modMask .|. controlMask,   xK_Right     ), nextWS)
