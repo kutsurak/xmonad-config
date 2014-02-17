@@ -116,7 +116,7 @@ manageHook' = (composeAll . concat $
         myIgnores = ["desktop","desktop_window","notify-osd","stalonetray","trayer"]
 
         -- names
-        myNames   = ["bashrun","Google Chrome Options","Chromium Options"]
+        myNames   = ["bashrun","Google Chrome Options","Chromium Options", "web2py Web Framework"]
 
 -- a trick for fullscreen but stil allow focusing of other WSs
 myDoFullFloat :: ManageHook
